@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://riken9377:yadayada@ublog.zkpy8.mongodb.net/UBlog").then(() => {
+mongoose.connect("").then(() => {
   console.log("Database is connected")
 })
 
