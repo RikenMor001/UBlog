@@ -1,13 +1,14 @@
 
 import User from "../model/user.model.js";
 import bcryptjs from "bcryptjs";
+import { errorHandler } from "../utils/error.js";
 
 export const signup = async(req, res,next) => {
     try {
         const {username, email, password} = req.body;
     
         if (!username && !email && !password && username == "" || email == "" || password == "") {
-            res.status(400).json({message: "Please fill all the fields"})
+            next(errorHandler(400, "Kindly fill all the fields"))
         }
     
         const user = await User.findOne({
@@ -16,7 +17,7 @@ export const signup = async(req, res,next) => {
         })
 
         if ( user ){
-            res.status(400).json({message: "Username or email already exists"})
+            next(errorHandler(400, "User already exists"))
         }  
     
         const hashedPassword = await bcryptjs.hashSync(password, 10);
