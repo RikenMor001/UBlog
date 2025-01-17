@@ -10,18 +10,20 @@ export default function SignUp(){
     setFormData({...formData, [e.target.id]: e.target.value})
   }
   const handleSubmit = async (e) => {
+    // prevent the page from refreshing as it would by default
     e.preventDefault();
     try {
-      const res = await fetch("../api/auth/signup", {
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(formData)
       });
       if (res.status === 200){
-        // Navigate the user to signin page 
+          window.location.href = "/signin"
       }
     }catch(error){
       console.error("There was an error from the backend" + error)
+      alert("There was an error from the backend" + error)
     }
   }
 
