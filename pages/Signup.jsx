@@ -9,6 +9,21 @@ export default function SignUp(){
   const  handleClick  = (e) => {
     setFormData({...formData, [e.target.id]: e.target.value})
   }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("../api/auth/signup", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(formData)
+      });
+      if (res.status === 200){
+        // Navigate the user to signin page 
+      }
+    }catch(error){
+      console.error("There was an error from the backend" + error)
+    }
+  }
 
   return <div className="min-h-screen mt-20">
     <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
@@ -24,7 +39,7 @@ export default function SignUp(){
       </div>
 
       <div className="flex-1">
-        <form className="flex flex-col gap-4 ">
+        <form className="flex flex-col gap-4 " onSubmit={handleSubmit}>
           <div>
             <Label value="Your username"/>
             <TextInput 
