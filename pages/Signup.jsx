@@ -1,7 +1,15 @@
 
 import { Button, Label, TextInput } from "flowbite-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 export default function SignUp(){
+  const [ formData, setFormData ] = useState({});
+
+  const  handleClick  = (e) => {
+    setFormData({...formData, [e.target.id]: e.target.value})
+  }
+
   return <div className="min-h-screen mt-20">
     <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
       <div className="flex-1">
@@ -23,16 +31,17 @@ export default function SignUp(){
             type="text"
             placeholder="Username"
             id="username"
+            onChange={ handleClick }
             />
           </div>
 
           <div>
             <Label value="Your email"/>
             <TextInput 
-            type="text"
-            placeholder="email@email.com"
+            type="email"
+            placeholder="something@email.com"
             id="email"
-            />
+            onChange={ handleClick }/>
           </div>
 
           <div>
@@ -41,6 +50,7 @@ export default function SignUp(){
             type="password"
             placeholder="Password"
             id="password"
+            onChange={ handleClick }
             />
           </div>
           
